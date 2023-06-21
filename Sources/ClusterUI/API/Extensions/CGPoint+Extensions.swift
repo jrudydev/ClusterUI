@@ -14,9 +14,8 @@ extension CGPoint {
     case .firework:
       focus = CGPoint(x: anchorPoint.x, y: anchorPoint.y)
     case .slide:
-      let rotatedPoint = CGPoint(x: anchorPoint.x, y: anchorPoint.y)
-        .rotatePoint(origin: CGPoint(x: 0.5, y: 0.5), byDegrees: -55.0)
-      focus = CGPoint(x: rotatedPoint.x, y: 1.0 - rotatedPoint.y)
+      let rotatedPoint = CGPoint(x: anchorPoint.x, y: anchorPoint.y) .rotatePoint(byDegrees: -55.0)
+      focus = CGPoint(x: rotatedPoint.x - rotatedPoint.y, y: rotatedPoint.y)
     }
 
     return focus
@@ -35,7 +34,7 @@ extension CGPoint {
     (value - 0.5) * magnitude + 0.5
   }
   
-  private func rotatePoint(origin: CGPoint, byDegrees: CGFloat) -> CGPoint {
+  private func rotatePoint(origin: CGPoint = CGPoint(x: 0.5, y: 0.5), byDegrees: CGFloat) -> CGPoint {
     let dx = x - origin.x
     let dy = y - origin.y
     let radius = sqrt(dx * dx + dy * dy)
